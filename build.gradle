@@ -1,0 +1,21 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    compile 'org.apache.struts:struts2-core:2.3.16.3'
+}
+
+
+idea.project.ipr {
+    withXml { provider ->
+        provider.node.component
+                .find { it.@name == 'VcsDirectoryMappings' }
+                .mapping.@vcs = 'Git'
+    }
+}
