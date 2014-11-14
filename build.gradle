@@ -14,7 +14,40 @@ dependencies {
 
 idea.project.ipr {
     withXml { provider ->
-        provider.node.component
+        def gradleProject = this.project
+        def project = provider.asNode()
+
+        def artifactManager = project.component.find { it.@name == 'ArtifactManager' } as Node
+        if (artifactManager) {
+            Node artifact = artifactManager.artifact.find { it.@type == 'exploded-war' } as Node
+            if (artifact) {
+                artifactManager.remove(artifact)
+            }
+        } else {
+            artifactManager = project.appendNode('component', [name: 'ArtifactManager'])
+        }
+
+        def builder = new NodeBuilder();
+        def artifact = builder.artifact(type: 'exploded-war', 'build-on-make': "true", name: "${gradleProject.name}/Exploded war") {
+            'output-path'("\$PROJECT_DIR\$/build/libs/${gradleProject.name}_exploded.war")
+            root(id: 'root') {
+                element(id: 'javaee-facet-resources', facet: 'struts2/web/Web')
+                element(id: 'directory', name: 'WEB-INF') {
+                    element(id: 'directory', name: 'classes') {
+                        element(id: 'module-output', name: 'struts2')
+                    }
+                    element(id: 'directory', name: 'lib') {
+                        gradleProject.configurations.runtime.each {
+                            element(id: 'file-copy', path: it)
+                        }
+                    }
+                }
+            }
+        }
+
+        artifactManager.append artifact
+
+        project.component
                 .find { it.@name == 'VcsDirectoryMappings' }
                 .mapping.@vcs = 'Git'
     }
