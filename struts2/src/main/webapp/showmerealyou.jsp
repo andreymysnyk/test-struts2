@@ -12,6 +12,9 @@
     <title>Show me</title>
 </head>
 <body>
-real you, <s:property value="name" />
+real you, <s:property value="name" /><br />
+real you, <s:property value="key1" /><br />
+real you, <s:property value="key2" /><br />
+real you, <s:property value="key3" /><br />
 </body>
 </html>

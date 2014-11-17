@@ -6,6 +6,7 @@
     <constant name="struts.devMode" value="true" />
     <package name="realyou" extends="struts-default">
         <action name="hello" class="andreym.MyFirstStrutAction" method="execute">
+            <result name="input">/index.jsp</result>
             <result name="success">/showmerealyou.jsp</result>
         </action>
     </package>

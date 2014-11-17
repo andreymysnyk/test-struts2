@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: amisnik
@@ -12,10 +13,9 @@
 </head>
 <body>
     <h2>Welcome from Struts 2</h2>
-    <form action="hello">
-        <label for="name">Please, enter your name</label>
-        <input type="text" name="name" id="name" />
-        <input type="submit" value="Say hello!" />
-    </form>
+    <s:form action="hello" method="post">
+        <s:textfield label="Please, enter your name" name="name" size="20" tooltip="tooltip<br/>2" />
+        <s:submit label="Say hello!" />
+    </s:form>
 </body>
 </html>
