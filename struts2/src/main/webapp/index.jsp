@@ -14,7 +14,7 @@
 <body>
     <h2>Welcome from Struts 2</h2>
     <s:form action="hello" method="post">
-        <s:textfield label="Please, enter your name" name="name" size="20" tooltip="tooltip<br/>2" />
+        <s:textfield key="global.field.name.label" name="name" size="20" />
         <s:submit label="Say hello!" />
     </s:form>
 </body>

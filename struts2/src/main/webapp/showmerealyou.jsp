@@ -16,5 +16,6 @@ real you, <s:property value="name" /><br />
 real you, <s:property value="key1" /><br />
 real you, <s:property value="key2" /><br />
 real you, <s:property value="key3" /><br />
+real you, <s:property value="getText('global.real.success')" /><br />
 </body>
 </html>
